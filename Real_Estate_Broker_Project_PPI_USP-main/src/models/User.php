@@ -11,6 +11,10 @@ class User
     private string $password;
     private int $userType;
 
+    private string $phone;
+    private string $image;
+    private string $description;
+
     public function __construct(int $id, string $username, string $email, string $password, int $userType)
     {
         $this->id = $id;
@@ -18,6 +22,9 @@ class User
         $this->email = $email;
         $this->password = $password;
         $this->userType = $userType;
+        $this->phone = null;
+        $this->image = null;
+        $this->description = null;
     }
 
     public function getId(): int
@@ -43,5 +50,17 @@ class User
     public function getUserType(): string
     {
         return $this->userType;
+    }
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+    public function getImage(): string
+    {
+        return $this->image;
+    }
+    public function getDescription(): string
+    {
+        return $this->description;
     }
 }

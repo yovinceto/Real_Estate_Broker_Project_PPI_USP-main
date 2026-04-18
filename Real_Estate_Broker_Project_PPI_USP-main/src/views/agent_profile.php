@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="bg">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Агенти</title>
+    <title><?= htmlspecialchars($agent->getUsername()); ?></title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -32,26 +32,25 @@
 
         <section class="content_section">
             <div class="container_center">
-                <div style="text-align:center; margin-bottom: 2rem;">
-                    <h2 class="section_title">Our Agents</h2>
-                    <p class="section_description">Meet our professional real estate brokers.</p>
-                </div>
+                <div class="property_card" style="display:flex; gap:2rem; align-items:flex-start; padding:2rem;">
+                    <div style="flex:0 0 320px;">
+                        <img
+                            src="<?= !empty($agent->getImage()) ? htmlspecialchars($agent->getImage()) : 'uploads/default-agent.jpg'; ?>"
+                            alt="<?= htmlspecialchars($agent->getUsername()); ?>"
+                            style="width:100%; height:400px; object-fit:cover; border-radius:12px;"
+                        >
+                    </div>
 
-                <div class="properties_grid">
-                    <?php foreach ($agents as $agent): ?>
-                        <div class="property_card" style="text-align:center;">
-                            <a href="index.php?action=agent_profile&id=<?= $agent->getId(); ?>" style="text-decoration:none; color:inherit;">
-                                <img
-                                    src="<?= !empty($agent->getImage()) ? htmlspecialchars($agent->getImage()) : 'uploads/default-agent.jpg'; ?>"
-                                    alt="<?= htmlspecialchars($agent->getUsername()); ?>"
-                                    style="width:100%; height:320px; object-fit:cover; border-radius:12px; margin-bottom:1rem;"
-                                >
-                                <h3><?= htmlspecialchars($agent->getUsername()); ?></h3>
-                            </a>
-                        </div>
-                    <?php endforeach; ?>
+                    <div style="flex:1;">
+                        <h2 class="section_title"><?= htmlspecialchars($agent->getUsername()); ?></h2>
+                        <p><strong>Email:</strong> <?= htmlspecialchars($agent->getEmail()); ?></p>
+                        <p><strong>Phone:</strong> <?= htmlspecialchars($agent->getPhone() ?? 'Not provided'); ?></p>
+                        <p><strong>About the agent:</strong></p>
+                        <p><?= nl2br(htmlspecialchars($agent->getDescription() ?? 'No description available.')); ?></p>
+                    </div>
                 </div>
             </div>
         </section>
     </div>
 </body>
+</html>
